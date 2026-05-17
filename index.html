@@ -1,100 +1,433 @@
-<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gym | wiktortylman.site</title>
-    <style>
-    body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; padding: 0 0 2rem 0; }
-    h1 { color: #2d3748; margin-top: 2rem; text-align: center; }
-    p, ul, table, h2, h3 { color: #4a5568; margin-left: auto; margin-right: auto; max-width: 700px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 1em; }
-    th, td { border: 1px solid #ddd; padding: 6px 10px; }
-    th { background: #f0f0f0; }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Domowy trening – hantle, sztanga, kettlebell, expandery</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --card-2: #1f2937;
+      --text: #f8fafc;
+      --muted: #a7b0be;
+      --accent: #38bdf8;
+      --accent-2: #86efac;
+      --border: #30363d;
+      --danger: #fca5a5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #172033 0%, var(--bg) 45%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    header {
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, .14), rgba(134, 239, 172, .07));
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+
+    h1, h2, h3 { line-height: 1.15; }
+    h1 { margin: 0 0 12px; font-size: clamp(2rem, 5vw, 4rem); }
+    h2 { margin: 40px 0 16px; font-size: clamp(1.5rem, 3vw, 2rem); }
+    h3 { margin: 0 0 8px; font-size: 1.12rem; }
+
+    p { margin: 0; color: var(--muted); }
+    code { color: var(--accent-2); }
+
+    .lead { max-width: 820px; font-size: 1.08rem; }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .badge {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      font-size: .9rem;
+    }
+
+    .note {
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 16px;
+      background: rgba(56,189,248,.08);
+      color: var(--muted);
+    }
+
+    .note strong { color: var(--text); }
+    .note.warning { border-left-color: var(--danger); background: rgba(252,165,165,.08); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
+      box-shadow: 0 14px 40px rgba(0,0,0,.25);
+    }
+
+    .card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #090c12;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .content { padding: 17px; }
+
+    .label {
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: .76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--card-2);
+      color: var(--accent-2);
+      font-size: .76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--card);
+    }
+
+    th, td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: var(--card-2); color: var(--accent); }
+    tr:last-child td { border-bottom: 0; }
+
+    .small { font-size: .92rem; }
+    .list { color: var(--muted); }
+    .list li { margin: 6px 0; }
+
+    @media (max-width: 640px) {
+      main { width: min(100% - 18px, 1120px); padding-top: 16px; }
+      header { padding: 20px; }
+      th, td { font-size: .9rem; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Plan treningowy – Gym</h1>
-    <h2>1. Wprowadzenie</h2>
-    <ul>
-        <li><strong>Sprzęt:</strong> hantle regulowane (2×10 kg).</li>
-        <li><strong>Częstotliwość:</strong> 2–3 razy w tygodniu.</li>
-    </ul>
-    <p><strong>Struktura:</strong></p>
-    <ul>
-        <li>Rozgrzewka (5 min)</li>
-        <li>Trening siłowy (plecy + klatka)</li>
-        <li>Interwały spalające (10–12 min)</li>
-        <li>Rozciąganie (5 min)</li>
-    </ul>
-    <h2>2. Ćwiczenia siłowe</h2>
-    <h3>A) Plecy</h3>
-    <ul>
-        <li>Wiosłowanie hantlami w opadzie – 3×10–12<br><em>Instrukcja:</em> pochyl się w pasie, trzymaj plecy prosto, podciągaj hantle do bioder.<br>
-            <img src="gifs/dumbbell_bent_over_row.gif" alt="Wiosłowanie hantlami" style="max-width:180px;vertical-align:middle;"> 
-            <img src="gifs/Barbell-bent-over-row-•-uitvoering-en-uitleg-•-MensPower.gif" alt="Wiosłowanie sztangą" style="max-width:180px;vertical-align:middle;">
-        </li>
-        <li>Martwy ciąg rumuński – 3×8–10<br><em>Wskazówka:</em> lekko ugięte kolana, ruch z bioder.<br>
-            <img src="gifs/dead-romanian_1.gif" alt="Martwy ciąg rumuński 1" style="max-width:180px;vertical-align:middle;">
-            <img src="gifs/dead-romanian_2.gif" alt="Martwy ciąg rumuński 2" style="max-width:180px;vertical-align:middle;">
-        </li>
-        <li>Shrugsy (wzruszanie ramion) – 3×12–15<br>Trzymaj hantle wzdłuż ciała, unosząc barki jak najwyżej.<br>
-            <img src="gifs/dumbbell-shrug_480x480.webp" alt="Shrugsy hantle" style="max-width:120px;vertical-align:middle;">
-            <img src="gifs/barbell-shrug-muscles.gif" alt="Shrugsy sztanga" style="max-width:120px;vertical-align:middle;">
-        </li>
-    </ul>
-    <h3>B) Klatka piersiowa</h3>
-    <ul>
-        <li>Wyciskanie hantli (na podłodze lub ławce) – 3×8–12<br>Opuszczaj hantle powoli, wypychaj mocno w górę.<br>
-            <img src="gifs/wyciskanie_hantli.gif" alt="Wyciskanie hantli" style="max-width:180px;vertical-align:middle;">
-            <img src="gifs/wyciskanie_sztangi.gif" alt="Wyciskanie sztangi" style="max-width:180px;vertical-align:middle;">
-        </li>
-        <li>Rozpiętki hantlami – 3×10–12<br>Łokcie lekko zgięte, ruch szeroki, kontrolowany.<br>
-            <img src="gifs/rozpietki_hantlami.gif" alt="Rozpiętki hantlami" style="max-width:180px;vertical-align:middle;">
-            <img src="gifs/rozpietki_sztanga.gif" alt="Rozpiętki sztanga" style="max-width:180px;vertical-align:middle;">
-        </li>
-        <li>Pompki (klasyczne lub wąskie) – 3×do upadku mięśniowego<br>
-            <img src="gifs/pompki.gif" alt="Pompki" style="max-width:180px;vertical-align:middle;">
-        </li>
-    </ul>
-    <h2>3. Interwały spalające (3 rundy)</h2>
-    <ul>
-        <li>Przysiady z hantlami – 30 s<br>
-            <img src="gifs/przysiad.gif" alt="Przysiady z hantlami" style="max-width:120px;vertical-align:middle;">
-        </li>
-        <li>Burpees – 30 s<br>
-            <img src="gifs/anim-dumbbell-burpees.gif" alt="Burpees" style="max-width:120px;vertical-align:middle;">
-        </li>
-        <li>Mountain climbers – 30 s<br>
-            <img src="gifs/anim-mountain-climbers.gif" alt="Mountain climbers" style="max-width:120px;vertical-align:middle;">
-        </li>
-        <li>Renegade row (deska + wiosłowanie) – 30 s<br>
-            <img src="gifs/dumbbell-renegade-row-1.gif" alt="Renegade row" style="max-width:120px;vertical-align:middle;">
-        </li>
-    </ul>
-    <h2>4. Rozciąganie (cool down)</h2>
-    <ul>
-        <li>Rozciąganie klatki przy ścianie – 30 s/strona</li>
-        <li>Skłony w przód (rozciąganie pleców) – 30 s</li>
-        <li>Koci grzbiet / krowa – 5 powtórzeń<br>
-            <img src="gifs/koci_grzbiet.gif" alt="Koci grzbiet" style="max-width:120px;vertical-align:middle;">
-        </li>
-    </ul>
-    <h2>5. Tabela skrócona</h2>
-    <table>
+  <main>
+    <header>
+      <h1>Domowy trening pod zdalną robotę</h1>
+      <p class="lead">
+        Cel: bicek, mocniejsze plecy, lepsza postawa i trochę klatki. Bez ćwiczeń leżących.
+        Sprzęt: hantle łączone w sztangę, expandery ze sprężynami i kettlebell.
+      </p>
+      <div class="badges">
+        <span class="badge">3× w tygodniu</span>
+        <span class="badge">20–35 min</span>
+        <span class="badge">bez leżenia</span>
+        <span class="badge">plecy > klata</span>
+        <span class="badge">sprzęt, który masz</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Zasada planu</h2>
+      <div class="note">
+        Przy pracy przy kompie priorytetem są <strong>plecy, łopatki, tył barków i biodra</strong>.
+        Klatkę robimy jako dodatek, żeby nie pogłębiać barków lecących do przodu.
+      </div>
+    </section>
+
+    <section>
+      <h2>Trening A — plecy + biceps</h2>
+      <div class="grid">
+        <article class="card">
+          <img src="gifs/wioslowanie_hantlami.gif" alt="Wiosłowanie hantlami albo sztangą w opadzie" />
+          <div class="content">
+            <div class="label">Plecy</div>
+            <h3>Wiosłowanie hantlami / sztangą</h3>
+            <p>Najważniejsze ćwiczenie pod plecy. Pochyl się, plecy neutralnie, ciągnij do bioder i ściągaj łopatki.</p>
+            <div class="meta"><span class="pill">4 serie</span><span class="pill">8–12 powt.</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="gifs/hammer_curl.gif" alt="Hammer curl z hantlami" />
+          <div class="content">
+            <div class="label">Biceps</div>
+            <h3>Hammer curl</h3>
+            <p>Neutralny chwyt. Dobre na grubość ramienia i zwykle łagodniejsze dla nadgarstków niż klasyczny curl.</p>
+            <div class="meta"><span class="pill">3 serie</span><span class="pill">10–15 powt.</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="gifs/reverse_fly.gif" alt="Odwrotne rozpiętki z hantlami" />
+          <div class="content">
+            <div class="label">Tył barków</div>
+            <h3>Reverse fly</h3>
+            <p>Lekkie hantle, kontrolowany ruch. To ćwiczenie robi dużo dla postawy i barków po siedzeniu.</p>
+            <div class="meta"><span class="pill">3 serie</span><span class="pill">12–20 powt.</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Trening B — tył ciała + klatka</h2>
+      <div class="grid">
+        <article class="card">
+          <img src="gifs/dead-romanian_2.gif" alt="Martwy ciąg rumuński z hantlami albo sztangą" />
+          <div class="content">
+            <div class="label">Postawa</div>
+            <h3>Romanian Deadlift</h3>
+            <p>Hantle albo złączona sztanga. Biodra idą do tyłu, plecy neutralnie. Masz czuć tył uda i pośladki.</p>
+            <div class="meta"><span class="pill">4 serie</span><span class="pill">8–12 powt.</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="gifs/kettlebell_swing.gif" alt="Kettlebell swing" />
+          <div class="content">
+            <div class="label">Kettlebell</div>
+            <h3>Kettlebell swing</h3>
+            <p>To nie jest przysiad. To zawias biodrowy: biodra w tył, dynamiczny wyprost, brzuch napięty.</p>
+            <div class="meta"><span class="pill">3 serie</span><span class="pill">12–20 powt.</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="gifs/dumbbell-suitcase-carry.gif" alt="Suitcase carry z kettlebell" />
+          <div class="content">
+            <div class="label">Core + postawa</div>
+            <h3>Suitcase carry</h3>
+            <p>Kettlebell w jednej ręce. Idziesz albo stoisz prosto. Nie przechylaj się na bok.</p>
+            <div class="meta"><span class="pill">3 rundy</span><span class="pill">30–60 sek./strona</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Mini reset 5 minut między callami</h2>
+      <div class="grid">
+        <article class="card">
+          <img src="gifs/The_6_Best_Beginner_Chest_Expander_Exercises.webp" alt="Rozciąganie expandera sprężynowego przed sobą" />
+          <div class="content">
+            <div class="label">Postawa</div>
+            <h3>Expander pull apart</h3>
+            <p>Ręce przed sobą, rozciągnij expander na boki. Cel: łopatki i tył barku, nie ego lifting.</p>
+            <div class="meta"><span class="pill">2 serie</span><span class="pill">12–20 powt.</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="gifs/The_6_Best_Beginner_Chest_Expander_Exercises.webp" alt="Rotacja zewnętrzna barku expanderem" />
+          <div class="content">
+            <div class="label">Barki</div>
+            <h3>Rotacja zewnętrzna barku</h3>
+            <p>Łokieć blisko ciała, obracasz przedramię na zewnątrz. Ma być lekko i dokładnie.</p>
+            <div class="meta"><span class="pill">2 serie</span><span class="pill">12–15/strona</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="gifs/chest_doorway_stretch.gif" alt="Rozciąganie klatki przy futrynie" />
+          <div class="content">
+            <div class="label">Klatka</div>
+            <h3>Rozciąganie klatki przy futrynie</h3>
+            <p>Łokieć na futrynie, delikatnie skręć ciało. Bez bólu w barku.</p>
+            <div class="meta"><span class="pill">2 rundy</span><span class="pill">30 sek./strona</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Rozpiska tygodnia</h2>
+      <table>
         <thead>
-            <tr><th>Ćwiczenie</th><th>Serie</th><th>Powtórzenia/Czas</th></tr>
+          <tr>
+            <th>Dzień</th>
+            <th>Plan</th>
+            <th>Uwagi</th>
+          </tr>
         </thead>
         <tbody>
-            <tr><td>Wiosłowanie</td><td>3</td><td>10–12</td></tr>
-            <tr><td>Martwy ciąg rumuński</td><td>3</td><td>8–10</td></tr>
-            <tr><td>Shrugsy</td><td>3</td><td>12–15</td></tr>
-            <tr><td>Wyciskanie hantli</td><td>3</td><td>8–12</td></tr>
-            <tr><td>Rozpiętki</td><td>3</td><td>10–12</td></tr>
-            <tr><td>Pompki</td><td>3</td><td>Do upadku</td></tr>
-            <tr><td>Interwały (4 ćwiczenia × 3r)</td><td>-</td><td>30s każde</td></tr>
+          <tr>
+            <td>Poniedziałek</td>
+            <td>Trening A</td>
+            <td>Plecy + biceps</td>
+          </tr>
+          <tr>
+            <td>Środa</td>
+            <td>Trening B</td>
+            <td>Tył ciała + klatka + core</td>
+          </tr>
+          <tr>
+            <td>Piątek / sobota</td>
+            <td>Trening A albo B</td>
+            <td>Wybierz ten, który mniej robiłeś</td>
+          </tr>
+          <tr>
+            <td>Codziennie</td>
+            <td>Mini reset 5 minut</td>
+            <td>Pull apart / rotacje / rozciąganie klatki</td>
+          </tr>
         </tbody>
-    </table>
-    <p style="font-size:0.9em;color:#888;margin-top:1em;">Gify poglądowe ćwiczeń znajdziesz wpisując ich nazwy w wyszukiwarce.</p>
+      </table>
+    </section>
+
+    <section>
+      <h2>Pliki GIF do wrzucenia do <code>/gifs</code></h2>
+      <div class="note warning small">
+        Nazwy plików, których używa ta strona:
+        <ul class="list">
+          <li><code>bent_over_row.gif</code></li>
+          <li><code>spring_expander_row.gif</code></li>
+          <li><code>hammer_curl.gif</code></li>
+          <li><code>reverse_fly.gif</code></li>
+          <li><code>romanian_deadlift.gif</code></li>
+          <li><code>kettlebell_swing.gif</code></li>
+          <li><code>standing_expander_chest_press.gif</code></li>
+          <li><code>kettlebell_suitcase_carry.gif</code></li>
+          <li><code>spring_expander_pull_apart.gif</code></li>
+          <li><code>standing_shoulder_external_rotation.gif</code></li>
+          <li><code>chest_doorway_stretch.gif</code></li>
+        </ul>
+      </div>
+    </section>
+      <section>
+      <h2>Czy ten plan zrobi większe bicepsy?</h2>
+      <div class="note">
+        Tak — ale tylko jeśli robisz progres. Nie chodzi o samo machanie hantlami, tylko o stopniowe zwiększanie bodźca:
+        więcej powtórzeń, większy ciężar albo wolniejsze opuszczanie.
+      </div>
+
+      <table style="margin-top:18px;">
+        <thead>
+          <tr>
+            <th>Co robi największą robotę</th>
+            <th>Dlaczego</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hammer curls</td>
+            <td>Budują grubość ramienia i zwykle są łagodniejsze dla nadgarstków.</td>
+          </tr>
+          <tr>
+            <td>Wiosłowanie</td>
+            <td>Poszerza górę sylwetki i sprawia, że ręce wyglądają większe.</td>
+          </tr>
+          <tr>
+            <td>Reverse fly</td>
+            <td>Buduje tył barków i poprawia postawę przy pracy siedzącej.</td>
+          </tr>
+          <tr>
+            <td>Regularność</td>
+            <td>3× tygodniowo po 20–35 minut działa lepiej niż jednorazowe katowanie się.</td>
+          </tr>
+          <tr>
+            <td>Wolne opuszczanie ciężaru</td>
+            <td>Przy domowym sprzęcie mocno zwiększa bodziec dla mięśni.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="margin-top:18px;">
+        <thead>
+          <tr>
+            <th>Przykład progresu</th>
+            <th>Cel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>10 kg × 10 powt.</td>
+            <td>Punkt startowy</td>
+          </tr>
+          <tr>
+            <td>10 kg × 15 powt.</td>
+            <td>Więcej objętości</td>
+          </tr>
+          <tr>
+            <td>12 kg × 10 powt.</td>
+            <td>Zwiększenie obciążenia</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="margin-top:18px;">
+        <thead>
+          <tr>
+            <th>Kiedy widać efekty</th>
+            <th>Orientacyjny czas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lepsze napięcie mięśni</td>
+            <td>2–4 tygodnie</td>
+          </tr>
+          <tr>
+            <td>Widoczna poprawa sylwetki</td>
+            <td>6–10 tygodni</td>
+          </tr>
+          <tr>
+            <td>Realnie większe ręce</td>
+            <td>3–6 miesięcy</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
 </body>
 </html>
